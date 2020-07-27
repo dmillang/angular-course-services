@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from '../model/course';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHandler, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,14 @@ export class CoursesService {
 
   }
 
+  saveCourse(course:Course) {
+
+    const headers = new HttpHeaders()
+      .set("X-Auth", "userId");
+
+    return this.http.put(`/api/courses/${course.id}`, 
+      course,{headers});
+
+  }
 
 }
